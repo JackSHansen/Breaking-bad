@@ -1,5 +1,6 @@
 import { useState } from "react";
 import style from "./GameRules.module.scss";
+import bgImg from "../../assets/background.jpg";
 
 export const GameRules = ({ action }) => {
   const [isOpen, setIsOpen] = useState(true);
@@ -15,7 +16,7 @@ export const GameRules = ({ action }) => {
       {isOpen ? (
         <div className={style.modalStyling}>
           <span>
-            <img src="./src/assets/background.jpg" alt="Spilbaggrund" />
+            <img src={bgImg} alt="Spilbaggrund" />
             <h2>Blackjack with dices</h2>
           </span>
           <span className={style.gameRules}>

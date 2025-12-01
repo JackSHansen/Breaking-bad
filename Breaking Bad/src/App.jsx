@@ -8,6 +8,7 @@ import { GameOver } from "./components/GameOver/GameOver";
 // import PlayerCard from "./components/Scror board/PlayerCard";
 import PlayerVsDealer from "./components/Scror board/PlayerVsDealer";
 import "./App.scss";
+import heisenbergImg from "./assets/Heisenberg.jpg";
 
 function App() {
   const [playerDiceSide, setPlayerDiceSide] = useState(0);
@@ -174,6 +175,13 @@ function App() {
 
   useEffect(() => {
     document.title = "Breaking Blackjack";
+    const setMeta = (selector, attr, val) => {
+      const el = document.querySelector(selector);
+      if (el) el.setAttribute(attr, val);
+    };
+    setMeta('meta[name="description"]', 'content', 'Breaking Blackjack – et simpelt terninge-blackjack spil. Spil mod dealeren og kom tættest på 21 uden at gå over.');
+    setMeta('meta[property="og:title"]', 'content', 'Breaking Blackjack');
+    setMeta('meta[property="og:description"]', 'content', 'Simpelt terninge-blackjack spil bygget i React. Prøv at slå dealeren til 21.');
   }, []);
 
   return (
@@ -189,7 +197,7 @@ function App() {
         <section aria-label="Spilområde">
           <div className="dice-container dealer-styling">
             <span className="dealer-container">
-              <img src="./src/assets/Heisenberg.jpg" alt="Heisenberg (dealeren)" />
+              <img src={heisenbergImg} alt="Heisenberg (dealeren)" />
               <h3>dealers dice</h3>
             </span>
             <Dice diceSide={dealerDiceSide} type="dealerDice" rolling={diceThrown} />

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import style from "./Button.module.scss";
 
 export const Button = ({ action, text, gameOver, throwing}) => {
@@ -7,27 +6,12 @@ export const Button = ({ action, text, gameOver, throwing}) => {
     action();
   }
 
-  // const checkTrue = () => {
-  //   if (gameOver) {
-  //     return true;
-  //   }
-  //   if (throwing) {
-  //     return true;
-  //   }
-  //   else {
-  //     return false;
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   console.log("Game", gameOver);
-  //   console.log("Dice", throwing);
-  
-  // }, [gameOver, throwing])
   return (
     <>
       <button
+        type="button"
         disabled={gameOver || throwing}
+        aria-busy={throwing}
         onClick={() => handleBtnClick()}
         className={`${style.buttonStyling} ${gameOver || throwing ? style.gameOver : null}`}
       >
