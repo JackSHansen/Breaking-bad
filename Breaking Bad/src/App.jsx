@@ -29,6 +29,44 @@ function App() {
 
   const [gameOver, setGameOver] = useState(false);
 
+  // Cookie consent + GA
+  const [cookieConsent, setCookieConsent] = useState(null); // 'granted' | 'denied' | null
+  const GA_ID = import.meta.env.VITE_GA_ID || "G-XXXXXXXXXX";
+
+  const enableAnalytics = () => {
+    if (typeof window === "undefined" || window.__gaLoaded || !GA_ID) return;
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag("js", new Date());
+    gtag("config", GA_ID, { anonymize_ip: true });
+
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    s.onload = () => { window.__gaLoaded = true; };
+    document.head.appendChild(s);
+  };
+
+  const acceptCookies = () => {
+    localStorage.setItem("cookie_consent", "granted");
+    setCookieConsent("granted");
+  };
+
+  const rejectCookies = () => {
+    localStorage.setItem("cookie_consent", "denied");
+    setCookieConsent("denied");
+  };
+
+  useEffect(() => {
+    const saved = localStorage.getItem("cookie_consent");
+    if (saved === "granted" || saved === "denied") setCookieConsent(saved);
+  }, []);
+
+  useEffect(() => {
+    if (cookieConsent === "granted") enableAnalytics();
+  }, [cookieConsent]);
+
   let diceAnimation = false;
 
   const handleDiceThrow = () => {
@@ -225,6 +263,43 @@ function App() {
       </GameBoard>
       {/* <PlayerCard /> */}
       <PlayerVsDealer userScore={playerScore} dealerScore={dealerScore} />
+
+      {cookieConsent === null && (
+        <div
+          role="dialog"
+          aria-label="Cookie-samtykke"
+          style={{
+            position: "fixed",
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 9999,
+            background: "rgba(0,0,0,0.9)",
+            color: "#fff",
+            padding: "16px",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+            gap: "12px",
+          }}
+        >
+          <p style={{ margin: 0, flex: "1 1 320px" }}>
+            Vi bruger cookies til statistik (Google Analytics). Vælg “Accepter” for at aktivere, eller “Afvis” for at fortsætte uden.
+          </p>
+          <div style={{ display: "flex", gap: "8px" }}>
+            <button type="button" onClick={rejectCookies} style={{ padding: "8px 12px" }}>
+              Afvis
+            </button>
+            <button
+              type="button"
+              onClick={acceptCookies}
+              style={{ padding: "8px 12px", background: "darkgreen", color: "#fff", border: 0 }}
+            >
+              Accepter
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
