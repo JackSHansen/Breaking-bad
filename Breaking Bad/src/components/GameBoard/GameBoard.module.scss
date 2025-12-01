@@ -1,0 +1,35 @@
+.gameBoard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 99%;
+  height: 99%;
+  background-image: url("../../assets/newRv.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
+  h1 {
+    font-family: breakingBad;
+    font-size: 85px;
+    text-align: center;
+    text-shadow: 2px 2px #00000077;
+    color: #fff;
+    font-weight: 200;
+  }
+
+  section {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    font-family: breakingBad;
+    text-shadow: 2px 2px #eee;
+
+    h3 {
+      font-size: 40px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+.diceStyling {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 4rem;
+    height: 4rem;
+    background: #69CFE4;
+    box-shadow: 6px 6px 6px #00000099;
+    border-radius: 7px;
+    font-family: sans-serif;
+    text-shadow: none;
+
+    &.dealerDice {
+        margin-left: 19rem;
+        position: absolute;
+        top: 35%;
+    }
+
+    &.diceRolling { 
+        animation: diceSpin 1.5s forwards ease-in-out;
+    }
+
+}
+
+@keyframes diceSpin {   
+    0% {transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+    100% {transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg)};
+}
