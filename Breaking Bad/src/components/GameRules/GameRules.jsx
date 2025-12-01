@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import style from "./GameRules.module.scss";
 
 export const GameRules = ({ action }) => {
@@ -6,7 +6,7 @@ export const GameRules = ({ action }) => {
 
   const handleCloseModal = () => {
     setIsOpen(false);
-    action();
+    action && action();
   };
 
   return (
@@ -15,7 +15,7 @@ export const GameRules = ({ action }) => {
       {isOpen ? (
         <div className={style.modalStyling}>
           <span>
-            <img src="./src/assets/background.jpg" />
+            <img src="./src/assets/background.jpg" alt="Spilbaggrund" />
             <h2>Blackjack with dices</h2>
           </span>
           <span className={style.gameRules}>
@@ -24,7 +24,7 @@ export const GameRules = ({ action }) => {
             <p>Spilleren kan vælge at "stå" (holde sig til den nuværende sum). ved 18 point</p>
             <p>Formål: At få en samlet sum tættere på 21 end Heisenberg uden at gå over (buste).</p>
           </span>
-          <button onClick={() => handleCloseModal()}>Start Gme</button>
+          <button onClick={() => handleCloseModal()}>Start Game</button>
         </div>
       ) : null}
     </>

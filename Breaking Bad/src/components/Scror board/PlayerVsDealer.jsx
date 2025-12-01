@@ -9,9 +9,9 @@ const PlayerVsDealer = ({ userScore, dealerScore }) => {
   ];
 
   return (
-    <main className={styles.gameContainer}>
-      <img src={img1} className={styles.backgroundImage} alt="" />
-      <section className={styles.cardsContainer}>
+    <section className={styles.gameContainer} aria-label="Scoreboard">
+      <img src={img1} className={styles.backgroundImage} alt="Spilbaggrund" />
+      <section className={styles.cardsContainer} aria-label="Spillerkort">
         {players.map((player, index) => (
           <PlayerCard
             key={index}
@@ -22,7 +22,7 @@ const PlayerVsDealer = ({ userScore, dealerScore }) => {
           />
         ))}
       </section>
-    </main>
+    </section>
   );
 };
 

@@ -5,7 +5,7 @@ import { Dice } from "./components/Dice/Dice";
 import { GameBoard } from "./components/GameBoard/GameBoard";
 import { GameRules } from "./components/GameRules/GameRules";
 import { GameOver } from "./components/GameOver/GameOver";
-import PlayerCard from "./components/Scror board/PlayerCard";
+// import PlayerCard from "./components/Scror board/PlayerCard";
 import PlayerVsDealer from "./components/Scror board/PlayerVsDealer";
 import "./App.scss";
 
@@ -172,18 +172,24 @@ function App() {
     }
   }, [gameOver]);
 
+  useEffect(() => {
+    document.title = "Breaking Blackjack";
+  }, []);
+
   return (
     <>
       <GameBoard>
-        <h1>
-          <span className="element-container">5</span>eaking{" "}
-          <span className="element-container">B</span>lackjack
-        </h1>
-        <GameRules />
-        <section>
+        <header>
+          <h1 id="site-title">
+            <span className="element-container">5</span>eaking{" "}
+            <span className="element-container">B</span>lackjack
+          </h1>
+        </header>
+        <GameRules action={() => {}} />
+        <section aria-label="Spilområde">
           <div className="dice-container dealer-styling">
             <span className="dealer-container">
-              <img src="./src/assets/Heisenberg.jpg" alt="Heisenberg" />
+              <img src="./src/assets/Heisenberg.jpg" alt="Heisenberg (dealeren)" />
               <h3>dealers dice</h3>
             </span>
             <Dice diceSide={dealerDiceSide} type="dealerDice" rolling={diceThrown} />
@@ -209,7 +215,7 @@ function App() {
           />
         ) : null}
       </GameBoard>
-      <PlayerCard />
+      {/* <PlayerCard /> */}
       <PlayerVsDealer userScore={playerScore} dealerScore={dealerScore} />
     </>
   );
